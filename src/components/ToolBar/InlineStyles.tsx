@@ -8,7 +8,7 @@ import { RichUtils } from 'draft-js'
 import type { EditorState } from 'draft-js'
 import React from 'react'
 
-import styles from './styles.module.css'
+import { ToolbarItem } from './styled'
 
 const inlineStyles = [
   {
@@ -38,16 +38,21 @@ export function InlineStyles({ editorState, updateEditorState }: Props) {
     updateEditorState(RichUtils.toggleInlineStyle(editorState, style))
   }
 
+  const isActive = (style: string) => {
+    const currentStyle = editorState.getCurrentInlineStyle()
+    return currentStyle.has(style)
+  }
+
   return (
     <>
       {inlineStyles.map((item) => (
-        <button
+        <ToolbarItem
+          isActive={isActive(item.style)}
           key={item.label}
-          className={`${styles.toolbarItem}`}
           onClick={() => addInlineStyle(item.style)}
         >
           {item.icon}
-        </button>
+        </ToolbarItem>
       ))}
     </>
   )
