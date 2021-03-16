@@ -5,6 +5,7 @@ import {
   faUnderline,
 } from '@fortawesome/free-solid-svg-icons'
 import { RichUtils } from 'draft-js'
+import type { EditorState } from 'draft-js'
 import React from 'react'
 
 import styles from './styles.module.css'
@@ -28,8 +29,8 @@ const inlineStyles = [
 ]
 
 type Props = {
-  editorState: any
-  updateEditorState: (newEditorState: any) => void
+  editorState: EditorState
+  updateEditorState: (newEditorState: EditorState) => void
 }
 
 export function InlineStyles({ editorState, updateEditorState }: Props) {

@@ -1,0 +1,4 @@
+.DraftEditor-root, .DraftEditor-editorContainer {
+  min-height: 9em;
+  width: 100%;
+}

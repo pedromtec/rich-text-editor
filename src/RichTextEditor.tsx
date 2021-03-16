@@ -2,14 +2,15 @@ import React, { useState } from 'react'
 import { Editor as DraftEditor, EditorState, RichUtils } from 'draft-js'
 
 import styles from './RichTextEditor.module.css'
+import './Draftjs.css'
 import ToolBar from './components/ToolBar'
 
 function RichTextEditor() {
-  const [editorState, setEditorState] = useState(() =>
+  const [editorState, setEditorState] = useState<EditorState>(() =>
     EditorState.createEmpty()
   )
 
-  function handleKeyCommand(command: string, currentState: any) {
+  const handleKeyCommand = (command: string, currentState: EditorState) => {
     const newEditorState = RichUtils.handleKeyCommand(currentState, command)
 
     if (newEditorState) {
@@ -25,7 +26,6 @@ function RichTextEditor() {
     <div className={`${styles.editorWrapper}`}>
       <div className={`${styles.editorContainer}`}>
         <DraftEditor
-          placeholder="Type something"
           editorState={editorState}
           onChange={setEditorState}
           handleKeyCommand={handleKeyCommand}
