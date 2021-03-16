@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Editor as DraftEditor, EditorState, RichUtils } from 'draft-js'
 
 import styles from './RichTextEditor.module.css'
@@ -9,6 +9,14 @@ function RichTextEditor() {
   const [editorState, setEditorState] = useState<EditorState>(() =>
     EditorState.createEmpty()
   )
+
+  const editorRef = useRef<DraftEditor>(null)
+
+  const focusOnEditor = () => editorRef.current?.focus()
+
+  useEffect(() => {
+    focusOnEditor()
+  })
 
   const handleKeyCommand = (command: string, currentState: EditorState) => {
     const newEditorState = RichUtils.handleKeyCommand(currentState, command)
@@ -29,6 +37,7 @@ function RichTextEditor() {
           editorState={editorState}
           onChange={setEditorState}
           handleKeyCommand={handleKeyCommand}
+          ref={editorRef}
         />
       </div>
       <ToolBar editorState={editorState} updateEditorState={setEditorState} />

@@ -1,30 +1,25 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faBold,
-  faItalic,
-  faUnderline,
-} from '@fortawesome/free-solid-svg-icons'
 import { RichUtils } from 'draft-js'
 import type { EditorState } from 'draft-js'
 import React from 'react'
 
+import { BOLD, ITALIC, UNDERLINE } from './inlineStylesIcon'
 import { ToolbarItem } from './styled'
 
 const inlineStyles = [
   {
     label: 'bold',
     style: 'BOLD',
-    icon: <FontAwesomeIcon icon={faBold} />,
+    Icon: BOLD,
   },
   {
     label: 'italic',
     style: 'ITALIC',
-    icon: <FontAwesomeIcon icon={faItalic} />,
+    Icon: ITALIC,
   },
   {
     label: 'underline',
     style: 'UNDERLINE',
-    icon: <FontAwesomeIcon icon={faUnderline} />,
+    Icon: UNDERLINE,
   },
 ]
 
@@ -40,6 +35,7 @@ export function InlineStyles({ editorState, updateEditorState }: Props) {
 
   const isActive = (style: string) => {
     const currentStyle = editorState.getCurrentInlineStyle()
+
     return currentStyle.has(style)
   }
 
@@ -51,7 +47,7 @@ export function InlineStyles({ editorState, updateEditorState }: Props) {
           key={item.label}
           onClick={() => addInlineStyle(item.style)}
         >
-          {item.icon}
+          {<item.Icon color={isActive(item.style) ? '#134CD8' : undefined} />}
         </ToolbarItem>
       ))}
     </>

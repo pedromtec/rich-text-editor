@@ -16,5 +16,4 @@ export const ToolbarItem = styled.button<ToolbarItemProps>`
   margin-right: 0.5rem;
   border-radius: 4px;
   cursor: pointer;
-  ${(props) => props.isActive && `color: #134CD8;`}
 `
